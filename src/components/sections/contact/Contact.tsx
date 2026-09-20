@@ -107,7 +107,7 @@ export function Contact() {
         </div>
 
         <p className="mt-12 text-center text-xs text-mist-600">
-          © {new Date().getFullYear()} {PROFILE.fullName}. Built with React, TypeScript and Three.js.
+          © {new Date().getFullYear()} {PROFILE.fullName}
         </p>
       </Container>
     </section>
