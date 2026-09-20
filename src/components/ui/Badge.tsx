@@ -8,10 +8,12 @@ interface BadgeProps {
   tone?: "iris" | "azure" | "neutral";
 }
 
+// All three tones are white pills with the system border now — in a monochrome scheme
+// the only thing that should ever colour a badge is its status dot.
 const tones = {
-  iris: "border-iris-400/30 bg-iris-500/10 text-iris-300",
-  azure: "border-azure-400/30 bg-azure-500/10 text-azure-300",
-  neutral: "border-white/10 bg-white/5 text-mist-200",
+  iris: "border-ink-600 bg-ink-800 text-mist-50",
+  azure: "border-ink-600 bg-ink-800 text-mist-200",
+  neutral: "border-ink-600 bg-ink-800 text-mist-200",
 };
 
 export function Badge({ children, className, icon, tone = "iris" }: BadgeProps) {

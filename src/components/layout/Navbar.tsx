@@ -39,7 +39,10 @@ export function Navbar() {
                   key={item.id}
                   href={`#${item.id}`}
                   className={cn(
-                    "relative px-3.5 py-2 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
+                    // whitespace-nowrap: a two-word label ("Looking For") otherwise wraps
+                    // inside its link, making it taller than its neighbours and throwing
+                    // the whole row out of alignment. Tighter padding pays for the width.
+                    "relative whitespace-nowrap px-3 py-2 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
                     activeId === item.id ? "text-mist-50" : "text-mist-400 hover:text-mist-100",
                   )}
                 >

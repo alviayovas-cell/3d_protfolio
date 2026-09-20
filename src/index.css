@@ -4,34 +4,45 @@
    DESIGN TOKENS
    ========================================================= */
 @theme {
-  /* Backgrounds — near-black / deep navy */
-  --color-ink-950: #050508;
-  --color-ink-900: #0a0a14;
-  --color-ink-800: #10101c;
-  --color-ink-700: #17172a;
-  --color-ink-600: #202038;
-  --color-ink-500: #2b2b47;
+  /*
+    Light monochrome palette. The scale names are kept so no component markup has to
+    change — `ink` is still "surface" and `mist` is still "text", they've just swapped
+    ends of the luminance range. `iris`/`azure` were the violet/blue accents; in a
+    monochrome scheme they collapse to greys so every existing accent usage stays
+    coherent without edits.
+  */
 
-  /* Text — white / light gray */
-  --color-mist-50: #f8f8fc;
-  --color-mist-100: #eeeef4;
-  --color-mist-200: #d3d3de;
-  --color-mist-400: #9d9dae;
-  --color-mist-600: #6f6f82;
-  --color-mist-800: #45455a;
+  /* Surfaces */
+  --color-ink-950: #ededea; /* hero / deepest surface */
+  --color-ink-900: #fafaf8; /* page background */
+  --color-ink-800: #ffffff; /* cards, nav, badges */
+  --color-ink-700: #e6e6e2;
+  --color-ink-600: #e5e5e2; /* border */
+  --color-ink-500: #c2c2bd;
 
-  /* Accent — violet / purple */
-  --color-iris-300: #c7b8fb;
-  --color-iris-400: #a78bfa;
-  --color-iris-500: #8b5cf6;
-  --color-iris-600: #7c3aed;
-  --color-iris-700: #6427c8;
+  /* Text */
+  --color-mist-50: #0a0a0a; /* primary */
+  --color-mist-100: #0a0a0a;
+  --color-mist-200: #2e2e2e;
+  --color-mist-400: #6b6b6b; /* secondary */
+  --color-mist-600: #6b6b6b;
+  --color-mist-800: #8f8f8a;
 
-  /* Accent — electric blue */
-  --color-azure-300: #93c5fd;
-  --color-azure-400: #60a5fa;
-  --color-azure-500: #3b82f6;
-  --color-azure-600: #2563eb;
+  /* Former violet accent — now near-black greys */
+  --color-iris-300: #3d3d3d;
+  --color-iris-400: #2a2a2a;
+  --color-iris-500: #0a0a0a;
+  --color-iris-600: #8a8a85; /* used at low alpha for the hero blooms */
+  --color-iris-700: #0a0a0a;
+
+  /* Former blue accent — now mid greys */
+  --color-azure-300: #6b6b6b;
+  --color-azure-400: #4a4a4a;
+  --color-azure-500: #2e2e2e;
+  --color-azure-600: #8a8a85;
+
+  /* Status — the only chromatic colour in the system */
+  --color-status: #22c55e;
 
   /* Typography */
   --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
@@ -54,7 +65,14 @@
 
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
+    /*
+      The hero's blur blooms are deliberately wider than the viewport and are clipped
+      by their container, but their layout boxes still widen the scroll area. `body`
+      alone isn't enough — some mobile browsers take the scroll width from `html`,
+      which shows up as rubber-banding sideways.
+    */
+    overflow-x: hidden;
   }
 
   body {
@@ -78,7 +96,7 @@
 
   ::selection {
     background: var(--color-iris-500);
-    color: var(--color-mist-50);
+    color: var(--color-ink-800);
   }
 
   /* Custom scrollbar — subtle, cinematic */
@@ -103,6 +121,24 @@
     border-radius: 2px;
   }
 
+  /*
+    Only applied once CustomCursor has actually mounted and started tracking, so a
+    device that never gets the custom cursor never loses the system one. Scoped to
+    fine pointers as a second guard.
+  */
+  @media (pointer: fine) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: none;
+    }
+    /* Text entry still needs a real caret cursor to be usable. */
+    html.has-custom-cursor input,
+    html.has-custom-cursor textarea,
+    html.has-custom-cursor select {
+      cursor: auto;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -120,18 +156,17 @@
    REUSABLE UTILITY LAYER
    ========================================================= */
 @layer components {
+  /* Monochrome scheme: the former violet→blue gradient is now solid primary text. The
+     class is kept so the many `text-gradient` spans need no markup change. */
   .text-gradient {
-    background: linear-gradient(120deg, var(--color-iris-300) 0%, var(--color-azure-400) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--color-mist-50);
   }
 
+  /* Was a translucent glass overlay for a dark backdrop; on a light page that reads as
+     nothing at all, so cards become plain white surfaces with the system border. */
   .glass-panel {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--color-ink-800);
+    border: 1px solid var(--color-ink-600);
   }
 
   .noise-overlay {
@@ -161,7 +196,7 @@
   .particle {
     position: absolute;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(199, 184, 251, 0.95), rgba(147, 197, 253, 0.1) 70%);
+    background: radial-gradient(circle, rgba(74, 74, 74, 0.8), rgba(74, 74, 74, 0.06) 70%);
     animation: particle-drift var(--particle-duration, 8s) ease-in-out infinite;
     animation-delay: var(--particle-delay, 0s);
     will-change: transform, opacity;
@@ -174,6 +209,52 @@
     }
     50% {
       transform: translateY(-14px);
+    }
+  }
+
+  /** Slow scale pulse layered under the float — reads as idle breathing. */
+  @keyframes avatar-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.014);
+    }
+  }
+
+  /** Gentle drift for the hero's floating project cards — staggered per card. */
+  @keyframes project-card-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-11px);
+    }
+  }
+
+  /** Aura pulse while the avatar is speaking — a state readout, not a control. */
+  @keyframes avatar-speaking {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(0.995);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.012);
+    }
+  }
+
+  /** Slight autonomous turn, independent of and slower than the cursor-driven tilt. */
+  @keyframes avatar-head-drift {
+    0%,
+    100% {
+      transform: rotateY(0deg) rotateZ(0deg);
+    }
+    50% {
+      transform: rotateY(2.2deg) rotateZ(-0.4deg);
     }
   }
 }

@@ -28,8 +28,8 @@ export function HeroScene({ parallax }: HeroSceneProps) {
       style={{ pointerEvents: "none" }}
     >
       <ambientLight intensity={0.5} />
-      <pointLight position={[4, 3, 4]} intensity={45} color="#a78bfa" />
-      <pointLight position={[-4, -2, 2]} intensity={30} color="#60a5fa" />
+      <pointLight position={[4, 3, 4]} intensity={45} color="#4a4a4a" />
+      <pointLight position={[-4, -2, 2]} intensity={30} color="#2e2e2e" />
       <Suspense fallback={null}>
         <ParallaxGroup parallax={parallax}>
           <ParticleField count={particleCount} />

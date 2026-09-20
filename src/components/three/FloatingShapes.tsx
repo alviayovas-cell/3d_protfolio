@@ -12,11 +12,11 @@ interface ShapeConfig {
 
 /** Fixed, hand-placed so they read as intentional accents rather than random clutter. */
 const ALL_SHAPES: ShapeConfig[] = [
-  { position: [-3.2, 1.1, -2], scale: 0.55, geometry: "icosahedron", color: "#a78bfa", speed: 1.1 },
-  { position: [3.4, -0.8, -1.5], scale: 0.4, geometry: "torus", color: "#60a5fa", speed: 0.9 },
-  { position: [-2.6, -1.6, -3], scale: 0.3, geometry: "octahedron", color: "#c7b8fb", speed: 1.3 },
-  { position: [2.8, 1.8, -2.5], scale: 0.35, geometry: "icosahedron", color: "#93c5fd", speed: 1.0 },
-  { position: [0.2, -2.2, -1.8], scale: 0.25, geometry: "octahedron", color: "#a78bfa", speed: 1.2 },
+  { position: [-3.2, 1.1, -2], scale: 0.55, geometry: "icosahedron", color: "#3d3d3d", speed: 1.1 },
+  { position: [3.4, -0.8, -1.5], scale: 0.4, geometry: "torus", color: "#4a4a4a", speed: 0.9 },
+  { position: [-2.6, -1.6, -3], scale: 0.3, geometry: "octahedron", color: "#5a5a5a", speed: 1.3 },
+  { position: [2.8, 1.8, -2.5], scale: 0.35, geometry: "icosahedron", color: "#4a4a4a", speed: 1.0 },
+  { position: [0.2, -2.2, -1.8], scale: 0.25, geometry: "octahedron", color: "#3d3d3d", speed: 1.2 },
 ];
 
 interface FloatingShapesProps {
@@ -35,7 +35,7 @@ function Shape({ position, scale, geometry, color, speed }: ShapeConfig) {
           color={color}
           wireframe
           transparent
-          opacity={0.35}
+          opacity={0.55}
           emissive={color}
           emissiveIntensity={0.35}
         />

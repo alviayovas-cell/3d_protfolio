@@ -52,8 +52,14 @@ export function Hero() {
               {PROFILE.greeting}
             </AnimatedText>
 
-            <h1 className="mt-4 font-display text-6xl font-semibold leading-[0.92] tracking-tight text-mist-50 sm:text-7xl lg:text-[5.5rem] xl:text-8xl">
-              <AnimatedText as="span" mode="words" delay={0.85} className="block">
+            {/*
+              Space Grotesk ships weights 300–700 only, so `font-extrabold` (800) would
+              synthesise or silently fall back — 700 is the heaviest honest weight for
+              this family. Size lands at 64px on desktop.
+            */}
+            <h1 className="mt-4 font-display text-5xl font-bold leading-[1.02] tracking-[-0.035em] text-mist-50 sm:text-6xl lg:text-[4rem]">
+              {/* The gradient used to separate the two names; in monochrome they need a gap. */}
+              <AnimatedText as="span" mode="words" delay={0.85} className="block mr-[0.22em]">
                 {PROFILE.firstName.toUpperCase()}
               </AnimatedText>
               <AnimatedText as="span" mode="words" delay={0.95} className="block text-gradient">

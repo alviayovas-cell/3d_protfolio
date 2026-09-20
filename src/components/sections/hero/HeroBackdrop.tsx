@@ -1,7 +1,18 @@
 import { motion } from "framer-motion";
-import { HeroScene } from "../../three/HeroScene";
+import { lazy, Suspense } from "react";
 import { usePrefersReducedMotion } from "../../../hooks/usePrefersReducedMotion";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useWebGLSupport } from "../../../hooks/useWebGLSupport";
+
+/*
+  Phase 25: three.js + R3F are ~900kB of the bundle and are only ever needed by this
+  backdrop — and not at all without WebGL, or under reduced motion. Loading them
+  lazily keeps them out of the initial payload entirely for those visitors, and off
+  the critical path for everyone else.
+*/
+const HeroScene = lazy(() =>
+  import("../../three/HeroScene").then((m) => ({ default: m.HeroScene })),
+);
 
 interface HeroBackdropProps {
   parallax: { x: number; y: number };
@@ -41,7 +52,15 @@ const PARTICLES: Particle[] = Array.from({ length: PARTICLE_COUNT }, (_, i) => (
 export function HeroBackdrop({ parallax }: HeroBackdropProps) {
   const reducedMotion = usePrefersReducedMotion();
   const webglSupported = useWebGLSupport();
+  /*
+    Phase 24: phones and small tablets get the CSS particle layer instead of the R3F
+    scene. It isn't only about frame rate — skipping it also means never downloading
+    the 884kB three.js chunk on a mobile connection. The lighting blooms, vignette and
+    drifting particles all still render, so the hero keeps its look.
+  */
+  const isSmallScreen = useMediaQuery("(max-width: 1023px)");
   const showParticles = !reducedMotion;
+  const useThreeScene = webglSupported && !isSmallScreen;
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -77,8 +96,11 @@ export function HeroBackdrop({ parallax }: HeroBackdropProps) {
 
       {/* Particles + floating depth accents — 3D when WebGL is available, CSS dots otherwise */}
       {showParticles &&
-        (webglSupported ? (
-          <HeroScene parallax={parallax} />
+        (useThreeScene ? (
+          // No fallback: the CSS blooms above already carry the scene until it loads.
+          <Suspense fallback={null}>
+            <HeroScene parallax={parallax} />
+          </Suspense>
         ) : (
           <motion.div
             className="absolute inset-0"

@@ -10,6 +10,9 @@ export const PROFILE = {
   tagline:
     "Computer Science Engineering student building intelligent applications, modern web experiences, and practical solutions with AI and full-stack technologies.",
   email: "alviayovas@gmail.com",
+  /** From the résumé, which is published on the site anyway. Remove this line and the
+   *  Contact section drops the phone row automatically. */
+  phone: "+91 93428 05727",
   location: "Chennai, India",
   social: {
     github: "https://github.com/alviayovas-cell",

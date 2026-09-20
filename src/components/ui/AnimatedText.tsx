@@ -1,5 +1,6 @@
 import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { cn } from "../../lib/cn";
 
 type Tag = "div" | "p" | "span" | "h1" | "h2" | "h3";
@@ -47,7 +48,19 @@ export function AnimatedText({
   delay = 0,
   mode = "block",
 }: AnimatedTextProps) {
+  const reducedMotion = usePrefersReducedMotion();
   const MotionTag = motion[Tag];
+
+  /*
+    Reduced motion bypasses the reveal entirely rather than just shortening it. These
+    variants start at opacity 0 and are driven by JS, so the global CSS
+    `prefers-reduced-motion` rule — which only tames CSS animations — can't reach them.
+    Left as-is, a reduced-motion visitor still gets every fade-up, and anything whose
+    in-view trigger never fires stays permanently invisible.
+  */
+  if (reducedMotion) {
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   if (mode === "words" && typeof children === "string") {
     const words = children.split(" ");
