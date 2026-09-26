@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#fafaf8" />
+    <meta name="theme-color" content="#faf8f3" />
+    <!-- Apply the saved / system theme before first paint (mirrors hooks/useTheme.ts). -->
+    <script>
+      (function () {
+        var t;
+        try { t = localStorage.getItem("theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark") {
+          t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = t;
+        if (t === "dark") document.querySelector('meta[name="theme-color"]').content = "#0f0f0f";
+      })();
+    </script>
     <title>Alvia Yovas | AI & Full Stack Developer</title>
     <meta
       name="description"
@@ -14,7 +26,7 @@
 
     <!--
       BEFORE DEPLOYING: add the real site URL as an absolute canonical + og:url, and
-      make og:image absolute (https://your-domain/images/alvia-avatar.png). Facebook,
+      make og:image absolute (https://your-domain/images/alvia-avatar.jpg). Facebook,
       LinkedIn and X all ignore relative image URLs. No domain is hard-coded here
       because the deployment URL isn't known yet — a wrong canonical is worse than none.
     -->
@@ -25,7 +37,7 @@
       property="og:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta property="og:image" content="/images/alvia-avatar.png" />
+    <meta property="og:image" content="/images/alvia-avatar.jpg" />
     <meta property="og:image:alt" content="Alvia Yovas — AI &amp; Full Stack Developer" />
     <meta property="og:locale" content="en_IN" />
 
@@ -36,7 +48,7 @@
       name="twitter:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta name="twitter:image" content="/images/alvia-avatar.png" />
+    <meta name="twitter:image" content="/images/alvia-avatar.jpg" />
 
     <!--
       Person schema. Only fields that are verified elsewhere on the site are included —

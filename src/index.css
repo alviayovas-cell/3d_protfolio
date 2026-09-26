@@ -5,43 +5,42 @@
    ========================================================= */
 @theme {
   /*
-    Light monochrome palette. The scale names are kept so no component markup has to
-    change — `ink` is still "surface" and `mist` is still "text", they've just swapped
-    ends of the luminance range. `iris`/`azure` were the violet/blue accents; in a
-    monochrome scheme they collapse to greys so every existing accent usage stays
-    coherent without edits.
+    Light theme: Ivory & Gold. `ink` is surface, `mist` is text, and `iris`/`azure`
+    are the gold accent scale (the names date from an earlier violet/blue palette).
+    The dark theme, a monochrome scheme, overrides these same variables under
+    `:root[data-theme="dark"]` below, so component markup never branches on theme.
   */
 
   /* Surfaces */
-  --color-ink-950: #ededea; /* hero / deepest surface */
-  --color-ink-900: #fafaf8; /* page background */
-  --color-ink-800: #ffffff; /* cards, nav, badges */
-  --color-ink-700: #e6e6e2;
-  --color-ink-600: #e5e5e2; /* border */
-  --color-ink-500: #c2c2bd;
+  --color-ink-950: #f3efe6; /* hero / deepest surface */
+  --color-ink-900: #faf8f3; /* page background — warm ivory */
+  --color-ink-800: #fffdf8; /* cards, nav, badges */
+  --color-ink-700: #eee8dc;
+  --color-ink-600: #e6dfd0; /* border */
+  --color-ink-500: #cfc5b0;
 
   /* Text */
-  --color-mist-50: #0a0a0a; /* primary */
-  --color-mist-100: #0a0a0a;
-  --color-mist-200: #2e2e2e;
-  --color-mist-400: #6b6b6b; /* secondary */
-  --color-mist-600: #6b6b6b;
-  --color-mist-800: #8f8f8a;
+  --color-mist-50: #1a1a1a; /* primary */
+  --color-mist-100: #1a1a1a;
+  --color-mist-200: #3a362f;
+  --color-mist-400: #6e675b; /* secondary */
+  --color-mist-600: #6e675b;
+  --color-mist-800: #9a9282;
 
-  /* Former violet accent — now near-black greys */
-  --color-iris-300: #3d3d3d;
-  --color-iris-400: #2a2a2a;
-  --color-iris-500: #0a0a0a;
-  --color-iris-600: #8a8a85; /* used at low alpha for the hero blooms */
-  --color-iris-700: #0a0a0a;
+  /* Gold accent. Text uses 300/400, which are darkened for contrast on ivory. */
+  --color-iris-300: #7f6232;
+  --color-iris-400: #8f6f3c;
+  --color-iris-500: #b08d57;
+  --color-iris-600: #c9a96e; /* used at low alpha for the hero blooms */
+  --color-iris-700: #8a6a36;
 
-  /* Former blue accent — now mid greys */
-  --color-azure-300: #6b6b6b;
-  --color-azure-400: #4a4a4a;
-  --color-azure-500: #2e2e2e;
-  --color-azure-600: #8a8a85;
+  /* Secondary gold / taupe */
+  --color-azure-300: #8f8672;
+  --color-azure-400: #b08d57;
+  --color-azure-500: #9c7a43;
+  --color-azure-600: #d8c4a0;
 
-  /* Status — the only chromatic colour in the system */
+  /* Status */
   --color-status: #22c55e;
 
   /* Typography */
@@ -55,6 +54,36 @@
   --breakpoint-xs: 420px;
 }
 
+/* Dark theme: monochrome. Set on <html> by the inline script in index.html and by useTheme. */
+:root[data-theme="dark"] {
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #0f0f0f;
+  --color-ink-800: #161616;
+  --color-ink-700: #1e1e1e;
+  --color-ink-600: #262626;
+  --color-ink-500: #3a3a3a;
+
+  --color-mist-50: #f5f5f5;
+  --color-mist-100: #f5f5f5;
+  --color-mist-200: #d4d4d4;
+  --color-mist-400: #a3a3a3;
+  --color-mist-600: #a3a3a3;
+  --color-mist-800: #737373;
+
+  --color-iris-300: #d4d4d4;
+  --color-iris-400: #e5e5e5;
+  --color-iris-500: #f5f5f5;
+  --color-iris-600: #737373;
+  --color-iris-700: #f5f5f5;
+
+  --color-azure-300: #a3a3a3;
+  --color-azure-400: #bdbdbd;
+  --color-azure-500: #d4d4d4;
+  --color-azure-600: #737373;
+
+  color-scheme: dark;
+}
+
 /* =========================================================
    BASE
    ========================================================= */
@@ -65,6 +94,7 @@
 
   html {
     scroll-behavior: smooth;
+    transition: background-color 0.3s ease;
     color-scheme: light;
     /*
       The hero's blur blooms are deliberately wider than the viewport and are clipped
@@ -77,6 +107,7 @@
 
   body {
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
     background: var(--color-ink-900);
     color: var(--color-mist-100);
     font-family: var(--font-sans);
@@ -156,9 +187,15 @@
    REUSABLE UTILITY LAYER
    ========================================================= */
 @layer components {
-  /* Monochrome scheme: the former violet→blue gradient is now solid primary text. The
-     class is kept so the many `text-gradient` spans need no markup change. */
+  /* Accent words in headings: a deep-gold gradient in light, solid white in dark. */
   .text-gradient {
+    background: linear-gradient(100deg, #7a5c2e, #a8844d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  :root[data-theme="dark"] .text-gradient {
+    background: none;
     color: var(--color-mist-50);
   }
 

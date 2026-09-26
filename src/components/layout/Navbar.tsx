@@ -7,6 +7,7 @@ import { useScrolled } from "../../hooks/useScrolled";
 import { cn } from "../../lib/cn";
 import { Container } from "../ui/Container";
 import { MobileMenu } from "./MobileMenu";
+import { ThemeToggle } from "./ThemeToggle";
 
 /** Premium sticky nav: transparent over the hero, blurred glass once scrolled, with a live active-section indicator. */
 export function Navbar() {
@@ -58,15 +59,18 @@ export function Navbar() {
               ))}
             </nav>
 
-            <button
-              type="button"
-              onClick={() => setMenuOpen((v) => !v)}
-              className="relative z-50 -mr-2 flex h-11 w-11 items-center justify-center rounded-full text-mist-50 transition-colors hover:bg-white/5 xl:hidden"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="relative z-50 -mr-2 flex h-11 w-11 items-center justify-center rounded-full text-mist-50 transition-colors hover:bg-ink-700 xl:hidden"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </Container>
       </header>

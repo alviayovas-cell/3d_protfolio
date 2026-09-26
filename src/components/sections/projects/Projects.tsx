@@ -1,4 +1,4 @@
-import { ArrowUpRight, Bot, CodeXml, FolderGit2, Mic, Plane, ShieldCheck, Target } from "lucide-react";
+import { ArrowUpRight, Bot, ChartNoAxesColumn, CodeXml, FolderGit2, Mic, Plane, ShieldCheck, Target } from "lucide-react";
 import type { ComponentType } from "react";
 import { PROJECTS, type Project } from "../../../data/projects";
 import { useScrollParallax } from "../../../hooks/useScrollParallax";
@@ -18,6 +18,7 @@ const ICONS: Record<Project["icon"], ComponentType<{ size?: number; className?: 
   zana: Mic,
   obe: Target,
   securewipe: ShieldCheck,
+  leettrack: ChartNoAxesColumn,
 };
 
 /**

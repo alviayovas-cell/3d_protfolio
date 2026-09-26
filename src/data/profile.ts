@@ -6,6 +6,8 @@ export const PROFILE = {
   displayName: "Alvia Yovas",
   role: "AI & Full Stack Developer",
   secondaryRole: "Computer Science Engineering Student",
+  /** Cycled by the hero's typing line ("I'm a …"). */
+  roles: ["AI & Full Stack Developer", "Full Stack Web Developer", "Applied AI Builder", "Embedded & IoT Tinkerer"],
   greeting: "Hello, I'm",
   tagline:
     "Computer Science Engineering student building intelligent applications, modern web experiences, and practical solutions with AI and full-stack technologies.",
@@ -24,6 +26,6 @@ export const PROFILE = {
     institution: "Jeppiaar Engineering College",
     years: "2024–2028",
   },
-  /** Swap in the real asset at this path once available — every consumer reads from here. */
-  avatarSrc: "/images/alvia-avatar.png",
+  /** AvatarStage's crop and blink positions are tuned to this exact photo. */
+  avatarSrc: "/images/alvia-avatar.jpg",
 } as const;

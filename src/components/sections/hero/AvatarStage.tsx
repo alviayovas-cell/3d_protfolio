@@ -9,25 +9,33 @@ import { Badge } from "../../ui/Badge";
 import { FloatingProjectCards } from "./FloatingProjectCards";
 
 /**
- * Eye positions as a % of the *rendered* frame, derived by mapping the source
- * image's eye pixels through the img's object-cover crop — not measured off the
- * raw asset, which lands ~15% off. Percentages stay correct at any viewport size
- * because the frame is aspect-locked, but they are tied to the img staying
- * `w-full h-[130%] object-cover object-top`: change that crop and these need
- * re-deriving.
+ * The source photo is a 1264×843 landscape shot; the frame shows a 520×650 (4:5)
+ * window of it starting at source pixel (471, 0), centred on the face. PHOTO_CROP
+ * expresses that window as the img's size/offset relative to the frame.
+ */
+const PHOTO_CROP = {
+  width: `${(1264 / 520) * 100}%`,
+  left: `${(-471 / 520) * 100}%`,
+};
+
+/**
+ * Eye positions as a % of the frame, derived by mapping the source image's eye
+ * pixels (≈706,128 and ≈756,128) through PHOTO_CROP. Percentages stay correct at
+ * any viewport size because the frame is aspect-locked, but change the crop and
+ * these need re-deriving.
  */
 const FACE_RIG = {
-  eyeLineTop: "24%",
-  leftEyeX: "58.6%",
-  rightEyeX: "72.1%",
-  eyeWidth: "8.5%",
-  eyeHeight: "2.8%",
+  eyeLineTop: "19.6%",
+  leftEyeX: "45.2%",
+  rightEyeX: "54.8%",
+  eyeWidth: "5%",
+  eyeHeight: "1.4%",
 };
 
 function Eyelid({ x, closed }: { x: string; closed: boolean }) {
   return (
     <span
-      className="absolute rounded-[50%] bg-[#a9744a] blur-[1.5px] transition-transform duration-[70ms] ease-out"
+      className="absolute rounded-[50%] bg-[#7a5037] blur-[1.5px] transition-transform duration-[70ms] ease-out"
       style={{
         top: FACE_RIG.eyeLineTop,
         left: x,
@@ -105,10 +113,8 @@ export function AvatarStage({ parallax }: AvatarStageProps) {
                       <img
                         src={PROFILE.avatarSrc}
                         alt={`${PROFILE.displayName} — ${PROFILE.role}`}
-                        // Source photo has a solid letterboxed strip along its bottom edge — zoom
-                        // in slightly and anchor to the top so that band is cropped out of view
-                        // instead of touching the actual asset.
-                        className="h-[130%] w-full object-cover object-top"
+                        className="absolute top-0 h-auto max-w-none"
+                        style={PHOTO_CROP}
                         onError={() => setImgFailed(true)}
                       />
                       <Eyelid x={FACE_RIG.leftEyeX} closed={blinking} />

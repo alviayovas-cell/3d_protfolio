@@ -19,7 +19,7 @@ export interface Project {
   /** Alt text for the screenshot — describes what the capture actually shows. */
   screenshotAlt?: string;
   /** Emblem icon, used when there's no screenshot. */
-  icon: "sentinel" | "codesphere" | "airindex" | "zana" | "obe" | "securewipe";
+  icon: "sentinel" | "codesphere" | "airindex" | "zana" | "obe" | "securewipe" | "leettrack";
 }
 
 /**
@@ -146,5 +146,28 @@ export const PROJECTS: Project[] = [
     screenshotAlt:
       "SecureWipe landing page headed 'Certified Data Erasure You Can Prove', with NIST 800-88 and DoD 5220.22-M compliance badges.",
     icon: "securewipe",
+  },
+  {
+    // From the project's README. The repo (leet-code-ai-) is private, so no repo link —
+    // it would 404 for visitors. The screenshot is the public sign-in page: the
+    // dashboard behind it is admin-only and shows real students' data.
+    id: "leettrack-ai",
+    name: "LeetTrack AI",
+    category: "Coding Analytics",
+    summary:
+      "A college-wide LeetCode analytics platform for Jeppiaar Engineering College — the admin uploads one spreadsheet, a daily job snapshots every student's and staff member's public LeetCode profile, and dashboards, leaderboards and reports are built from those snapshots.",
+    highlights: [
+      "Daily profile snapshots",
+      "Daily to all-time leaderboards",
+      "Department & staff analytics",
+      "Bulk spreadsheet import",
+      "Excel / CSV / PDF export",
+    ],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Recharts"],
+    liveUrl: "https://leetcodealvia.vercel.app",
+    screenshot: "/images/projects/leettrack-ai.png",
+    screenshotAlt:
+      "LeetTrack AI administrator sign-in page, with the Jeppiaar Engineering College crest and the tagline 'Every student's progress, in one daily picture.'",
+    icon: "leettrack",
   },
 ];
