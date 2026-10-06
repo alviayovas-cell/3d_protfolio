@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen scroll-mt-24 items-center overflow-hidden bg-ink-950 pt-20"
+      className="relative flex min-h-screen scroll-mt-24 items-center overflow-hidden bg-ink-950 pt-20 pb-16 sm:pb-20 lg:pb-12"
     >
       <HeroBackdrop parallax={parallax} />
 
@@ -98,10 +98,11 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Button href="#projects" variant="primary" size="lg" icon={<ArrowRight size={18} />}>
+            {/* Equal widths so the pair reads as one centred unit rather than two ragged pills. */}
+            <Button href="#projects" variant="primary" size="lg" icon={<ArrowRight size={18} />} className="w-full max-w-xs sm:w-60">
               View My Work
             </Button>
-            <Button href="#contact" variant="secondary" size="lg" icon={<Mail size={18} />}>
+            <Button href="#contact" variant="secondary" size="lg" icon={<Mail size={18} />} className="w-full max-w-xs sm:w-60">
               Contact Me
             </Button>
           </motion.div>
