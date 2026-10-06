@@ -57,6 +57,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Alvia Yovas S",
+        "alternateName": "Alvia Yovas",
         "jobTitle": "AI & Full Stack Developer",
         "url": "https://www.alviayovas.in/",
         "image": "https://www.alviayovas.in/images/alvia-avatar.jpg",
@@ -70,6 +71,16 @@
         ]
       }
     </script>
+    <!-- Lets Google show "Alvia Yovas" as the site name in results instead of the domain. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Alvia Yovas",
+        "alternateName": ["Alvia Yovas S", "alviayovas.in"],
+        "url": "https://www.alviayovas.in/"
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -79,7 +90,33 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <!--
+      Static summary for crawlers that don't run JavaScript (and for Google's first,
+      pre-render pass). React's createRoot replaces it on mount, so visitors never see
+      it for more than a moment. Keep it in sync with src/data/profile.ts.
+    -->
+    <div id="root">
+      <main style="max-width:40rem;margin:0 auto;padding:6rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6">
+        <h1>Alvia Yovas</h1>
+        <p><strong>AI &amp; Full Stack Developer</strong> · Computer Science Engineering student, Chennai, India</p>
+        <p>
+          Computer Science Engineering student building intelligent applications, modern web
+          experiences, and practical solutions with AI and full-stack technologies.
+        </p>
+        <h2>Projects</h2>
+        <p>Sentinel · Codesphere · AirIndex India · Zana AI · OBE-AI / CO-PO · SecureWipe · LeetTrack AI</p>
+        <h2>Education</h2>
+        <p>B.E. Computer Science and Engineering, Jeppiaar Engineering College (2024–2028)</p>
+        <h2>Contact</h2>
+        <p>
+          <a href="mailto:alviayovas@gmail.com">alviayovas@gmail.com</a> ·
+          <a href="https://github.com/alviayovas-cell">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/alviayovas">LinkedIn</a> ·
+          <a href="https://instagram.com/alvia_yovas">Instagram</a> ·
+          <a href="/resume.pdf">Résumé</a>
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
