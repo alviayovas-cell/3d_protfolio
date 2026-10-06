@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { CustomCursor } from "./components/layout/CustomCursor";
+import { FloatingContact } from "./components/layout/FloatingContact";
 import { Navbar } from "./components/layout/Navbar";
 import { SectionPlaceholder } from "./components/layout/SectionPlaceholder";
 import { About } from "./components/sections/about/About";
@@ -50,6 +51,7 @@ function App() {
       </a>
       <CustomCursor />
       <Navbar />
+      <FloatingContact />
       <main id="main" className="bg-ink-900">
         {SECTIONS.map((item) => {
           const Section = COMPONENTS[item.id];
