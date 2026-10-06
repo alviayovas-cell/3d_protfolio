@@ -6,7 +6,6 @@ import { useIntroSpeech } from "../../../hooks/useIntroSpeech";
 import { usePrefersReducedMotion } from "../../../hooks/usePrefersReducedMotion";
 import { cn } from "../../../lib/cn";
 import { Badge } from "../../ui/Badge";
-import { FloatingProjectCards } from "./FloatingProjectCards";
 
 /**
  * The source photo is a 1264×843 landscape shot; the frame shows a 520×650 (4:5)
@@ -77,7 +76,6 @@ export function AvatarStage({ parallax }: AvatarStageProps) {
       className="relative mx-auto w-full max-w-[22rem] sm:max-w-sm lg:max-w-md"
       style={{ perspective: 1200 }}
     >
-      <FloatingProjectCards parallax={parallax} />
       {/* Layer 1: cursor parallax — translate for depth, a slight 3D tilt so the avatar feels like it's turning toward the cursor */}
       <div
         style={
