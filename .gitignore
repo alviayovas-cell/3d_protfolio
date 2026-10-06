@@ -25,3 +25,6 @@ dist-ssr
 
 # Duplicate of public/resume.pdf kept in the project root
 AlviaYovas_Resumewith photo.pdf
+
+.vercel
+.env*
