@@ -24,20 +24,18 @@
     />
     <meta name="author" content="Alvia Yovas S" />
 
-    <!--
-      BEFORE DEPLOYING: add the real site URL as an absolute canonical + og:url, and
-      make og:image absolute (https://your-domain/images/alvia-avatar.jpg). Facebook,
-      LinkedIn and X all ignore relative image URLs. No domain is hard-coded here
-      because the deployment URL isn't known yet — a wrong canonical is worse than none.
-    -->
+    <link rel="canonical" href="https://www.alviayovas.in/" />
+
+    <!-- Social crawlers ignore relative image URLs, so these must stay absolute. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alvia Yovas" />
+    <meta property="og:url" content="https://www.alviayovas.in/" />
     <meta property="og:title" content="Alvia Yovas | AI &amp; Full Stack Developer" />
     <meta
       property="og:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta property="og:image" content="/images/alvia-avatar.jpg" />
+    <meta property="og:image" content="https://www.alviayovas.in/images/alvia-avatar.jpg" />
     <meta property="og:image:alt" content="Alvia Yovas — AI &amp; Full Stack Developer" />
     <meta property="og:locale" content="en_IN" />
 
@@ -48,7 +46,7 @@
       name="twitter:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta name="twitter:image" content="/images/alvia-avatar.jpg" />
+    <meta name="twitter:image" content="https://www.alviayovas.in/images/alvia-avatar.jpg" />
 
     <!--
       Person schema. Only fields that are verified elsewhere on the site are included —
@@ -60,6 +58,8 @@
         "@type": "Person",
         "name": "Alvia Yovas S",
         "jobTitle": "AI & Full Stack Developer",
+        "url": "https://www.alviayovas.in/",
+        "image": "https://www.alviayovas.in/images/alvia-avatar.jpg",
         "email": "mailto:alviayovas@gmail.com",
         "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressCountry": "IN" },
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jeppiaar Engineering College" },

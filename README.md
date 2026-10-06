@@ -19,7 +19,7 @@ npm run lint     # oxlint
 **All 31 phases complete (0–30).** Every section on the plan is built; there are no
 placeholders left on the page.
 
-**Next:** set the site URL in `index.html` and deploy — see *Before deploying*.
+**Live:** https://www.alviayovas.in (Vercel; `alviayovas.in` redirects to `www`).
 
 **Last Verified:**
 2026-09-20 — production build, Playwright + axe-core across mobile / tablet / laptop /
@@ -60,9 +60,8 @@ from the résumé* below.
 
 ## Before deploying
 
-1. **Set the site URL** in `index.html` — add an absolute `canonical` and `og:url`, and
-   make `og:image` absolute. No domain is hard-coded, because a wrong canonical is
-   worse than none.
+1. ~~Set the site URL~~ — done: `canonical`, `og:url` and absolute `og:image` point at
+   `https://www.alviayovas.in`, with `public/robots.txt` and `public/sitemap.xml`.
 2. **Check the voice intro in a real browser.** Headless Edge has no TTS voices, so
    the audio itself has never been heard in testing.
 3. **Decide on the phone number.** `+91 93428 05727` now renders in Contact because the
