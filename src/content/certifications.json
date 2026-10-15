@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "full-stack-sla",
+      "title": "Full Stack Web Development",
+      "issuer": "SLA (Virtual)",
+      "period": "Jan 2025 – Jul 2025",
+      "summary": "HTML, CSS, JavaScript, React, Node.js and Express.js with database integration, plus REST APIs and authentication basics."
+    },
+    {
+      "id": "dca-csc",
+      "title": "Diploma in Computer Applications (DCA)",
+      "issuer": "CSC, Nagapattinam",
+      "period": "Jan 2021 – Jan 2022",
+      "summary": "Fundamentals of computer systems, MS Office, basic programming and internet technologies."
+    }
+  ]
+}

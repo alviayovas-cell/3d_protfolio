@@ -12,11 +12,14 @@ import { SectionHeading } from "../../ui/SectionHeading";
  * `PROFILE.phone` is set — it came from the résumé, so removing that field is all it
  * takes to pull the number off the site.
  */
+/** The username is the profile URL's last path segment, so editing a URL updates its label too. */
+const handleOf = (href: string) => new URL(href).pathname.split("/").filter(Boolean).pop() ?? href;
+
 const SOCIALS = [
-  { key: "github", label: "GitHub", handle: "alviayovas-cell", href: PROFILE.social.github, Icon: GithubIcon },
-  { key: "linkedin", label: "LinkedIn", handle: "alviayovas", href: PROFILE.social.linkedin, Icon: LinkedinIcon },
-  { key: "instagram", label: "Instagram", handle: "alvia_yovas", href: PROFILE.social.instagram, Icon: InstagramIcon },
-];
+  { key: "github", label: "GitHub", href: PROFILE.social.github, Icon: GithubIcon },
+  { key: "linkedin", label: "LinkedIn", href: PROFILE.social.linkedin, Icon: LinkedinIcon },
+  { key: "instagram", label: "Instagram", href: PROFILE.social.instagram, Icon: InstagramIcon },
+].map((s) => ({ ...s, handle: handleOf(s.href) }));
 
 export function Contact() {
   return (

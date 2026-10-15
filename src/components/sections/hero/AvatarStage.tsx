@@ -142,16 +142,18 @@ export function AvatarStage({ parallax }: AvatarStageProps) {
               </motion.div>
 
               {/* Floating decorative badges — entrance last, kept outside the frame so they never cross the face */}
-              <motion.div
-                className="absolute -right-4 -top-4 sm:-right-6 sm:-top-6"
-                initial={{ opacity: 0, y: -10, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: 2.0, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <Badge tone="neutral" icon={<span className="h-1.5 w-1.5 rounded-full bg-status" />}>
-                  Available for work
-                </Badge>
-              </motion.div>
+              {PROFILE.availableForWork && (
+                <motion.div
+                  className="absolute -right-4 -top-4 sm:-right-6 sm:-top-6"
+                  initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 2.0, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Badge tone="neutral" icon={<span className="h-1.5 w-1.5 rounded-full bg-status" />}>
+                    Available for work
+                  </Badge>
+                </motion.div>
+              )}
 
               <motion.div
                 className="absolute -bottom-3 -left-4 sm:-bottom-4 sm:-left-6"

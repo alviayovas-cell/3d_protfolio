@@ -10,6 +10,25 @@ npm run build    # tsc -b && vite build
 npm run lint     # oxlint
 ```
 
+## Editing content
+
+All page content lives in **`src/content/*.json`** — one file per section (profile,
+about, projects, skills, experience, education, certifications, achievements, services,
+lookingFor, resume). Edit the JSON, not the components. Shapes are defined once in
+`src/content/schema.ts`.
+
+`scripts/content-plugin.ts` runs on every dev start and build:
+
+- **Validates** each file against its schema, and checks that every image/PDF path
+  exists in `public/`. A bad edit fails the build, so Vercel keeps the last good deploy.
+- **Generates** the page title, Person/WebSite JSON-LD and the static crawler summary
+  inside `#root` (`index.html` is a template), plus `sitemap.xml` with today's date.
+
+Images: screenshots are 1400px-wide WebP under `public/images/projects/`; the photo is
+`alvia-avatar.webp` (display) + `alvia-avatar.jpg` (structured data). Link previews use
+`public/og-image.jpg` (1200×630). `public/googlef0cdf51bb5082d80.html` keeps Google
+Search Console verified — don't delete it.
+
 ---
 
 # Project Progress

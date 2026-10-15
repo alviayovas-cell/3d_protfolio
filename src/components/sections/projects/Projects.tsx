@@ -11,7 +11,7 @@ import { GlassCard } from "../../ui/GlassCard";
 import { SectionHeading } from "../../ui/SectionHeading";
 import { SentinelDiagram } from "./SentinelDiagram";
 
-const ICONS: Record<Project["icon"], ComponentType<{ size?: number; className?: string }>> = {
+const ICONS: Record<NonNullable<Project["icon"]>, ComponentType<{ size?: number; className?: string }>> = {
   sentinel: Bot,
   codesphere: CodeXml,
   airindex: Plane,
@@ -72,7 +72,8 @@ function ProjectShot({ project }: { project: Project }) {
  * mocked-up browser frame — that would imply a capture that doesn't exist.
  */
 function ProjectEmblem({ project, index }: { project: Project; index: number }) {
-  const Icon = ICONS[project.icon];
+  // New projects added from the admin panel may not pick an emblem.
+  const Icon = project.icon ? ICONS[project.icon] : FolderGit2;
   // Phase 23: the emblem drifts against the scroll, giving each card depth as it passes.
   const { ref, offset } = useScrollParallax<HTMLDivElement>({ strength: 26 });
   return (

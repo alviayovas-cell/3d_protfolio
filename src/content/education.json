@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": "be-cse",
+      "qualification": "B.E. Computer Science and Engineering",
+      "institution": "Jeppiaar Engineering College",
+      "period": "2024–2028",
+      "current": true
+    },
+    {
+      "id": "diploma-computer-application",
+      "qualification": "Diploma in Computer Applications",
+      "institution": "CSC Computer Education, Mayiladuthurai",
+      "period": "2021–2022",
+      "current": false,
+      "note": "Dates and location corrected from the résumé (2021–2022, Mayiladuthurai); the original brief said 2023–2024."
+    }
+  ]
+}

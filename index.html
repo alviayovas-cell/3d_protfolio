@@ -2,7 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Template: the __SITE_*__ tokens and the "content:jsonld" / "content:summary"
+      markers are filled in from src/content/*.json by scripts/content-plugin.ts.
+      Edit the content, not the generated parts of this file.
+    -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#faf8f3" />
     <!-- Apply the saved / system theme before first paint (mirrors hooks/useTheme.ts). -->
@@ -17,70 +25,49 @@
         if (t === "dark") document.querySelector('meta[name="theme-color"]').content = "#0f0f0f";
       })();
     </script>
-    <title>Alvia Yovas | AI & Full Stack Developer</title>
+    <title>__SITE_TITLE__</title>
     <meta
       name="description"
       content="Portfolio of Alvia Yovas, an AI & Full Stack Developer and Computer Science Engineering student building intelligent applications and modern digital experiences."
     />
-    <meta name="author" content="Alvia Yovas S" />
+    <meta name="author" content="__SITE_AUTHOR__" />
 
-    <link rel="canonical" href="https://www.alviayovas.in/" />
+    <link rel="canonical" href="__SITE_URL__/" />
 
     <!-- Social crawlers ignore relative image URLs, so these must stay absolute. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alvia Yovas" />
-    <meta property="og:url" content="https://www.alviayovas.in/" />
-    <meta property="og:title" content="Alvia Yovas | AI &amp; Full Stack Developer" />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:title" content="__SITE_TITLE__" />
     <meta
       property="og:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta property="og:image" content="https://www.alviayovas.in/images/alvia-avatar.jpg" />
-    <meta property="og:image:alt" content="Alvia Yovas — AI &amp; Full Stack Developer" />
+    <meta property="og:image" content="__SITE_URL__/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="__SITE_TITLE__" />
     <meta property="og:locale" content="en_IN" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Alvia Yovas | AI &amp; Full Stack Developer" />
+    <meta name="twitter:title" content="__SITE_TITLE__" />
     <meta
       name="twitter:description"
       content="AI & Full Stack Developer building intelligent applications, modern web experiences and practical tools."
     />
-    <meta name="twitter:image" content="https://www.alviayovas.in/images/alvia-avatar.jpg" />
+    <meta name="twitter:image" content="__SITE_URL__/og-image.jpg" />
 
-    <!--
-      Person schema. Only fields that are verified elsewhere on the site are included —
-      no job title inflation, no employer, no awards markup.
-    -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Alvia Yovas S",
-        "alternateName": "Alvia Yovas",
-        "jobTitle": "AI & Full Stack Developer",
-        "url": "https://www.alviayovas.in/",
-        "image": "https://www.alviayovas.in/images/alvia-avatar.jpg",
-        "email": "mailto:alviayovas@gmail.com",
-        "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressCountry": "IN" },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jeppiaar Engineering College" },
-        "sameAs": [
-          "https://github.com/alviayovas-cell",
-          "https://www.linkedin.com/in/alviayovas",
-          "https://instagram.com/alvia_yovas"
-        ]
-      }
-    </script>
-    <!-- Lets Google show "Alvia Yovas" as the site name in results instead of the domain. -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Alvia Yovas",
-        "alternateName": ["Alvia Yovas S", "alviayovas.in"],
-        "url": "https://www.alviayovas.in/"
-      }
-    </script>
+    <!-- Person + WebSite structured data, generated from profile, education and skills. -->
+    <!-- content:jsonld -->
+
+    <style>
+      /* The crawler summary below shows for a moment before React mounts; keep it calm. */
+      .static-summary { max-width: 42rem; margin: 0 auto; padding: 6rem 1.5rem; font: 16px/1.6 system-ui, sans-serif; opacity: 0.85; }
+      .static-summary h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+      .static-summary h2 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+      .static-summary a { color: inherit; }
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -91,31 +78,12 @@
   </head>
   <body>
     <!--
-      Static summary for crawlers that don't run JavaScript (and for Google's first,
-      pre-render pass). React's createRoot replaces it on mount, so visitors never see
-      it for more than a moment. Keep it in sync with src/data/profile.ts.
+      Static summary for crawlers that don't run JavaScript (and Google's first,
+      pre-render pass), generated from src/content. React's createRoot replaces it on
+      mount, so visitors only see it for a moment.
     -->
     <div id="root">
-      <main style="max-width:40rem;margin:0 auto;padding:6rem 1.5rem;font-family:system-ui,sans-serif;line-height:1.6">
-        <h1>Alvia Yovas</h1>
-        <p><strong>AI &amp; Full Stack Developer</strong> · Computer Science Engineering student, Chennai, India</p>
-        <p>
-          Computer Science Engineering student building intelligent applications, modern web
-          experiences, and practical solutions with AI and full-stack technologies.
-        </p>
-        <h2>Projects</h2>
-        <p>Sentinel · Codesphere · AirIndex India · Zana AI · OBE-AI / CO-PO · SecureWipe · LeetTrack AI</p>
-        <h2>Education</h2>
-        <p>B.E. Computer Science and Engineering, Jeppiaar Engineering College (2024–2028)</p>
-        <h2>Contact</h2>
-        <p>
-          <a href="mailto:alviayovas@gmail.com">alviayovas@gmail.com</a> ·
-          <a href="https://github.com/alviayovas-cell">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/alviayovas">LinkedIn</a> ·
-          <a href="https://instagram.com/alvia_yovas">Instagram</a> ·
-          <a href="/resume.pdf">Résumé</a>
-        </p>
-      </main>
+      <!-- content:summary -->
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

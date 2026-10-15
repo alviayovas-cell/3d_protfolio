@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "sih",
+      "icon": "award",
+      "kind": "Achievement",
+      "title": "2× SIH Internal Winner",
+      "context": "Smart India Hackathon — winner of the internal round, twice."
+    },
+    {
+      "id": "aws-lead",
+      "icon": "lead",
+      "kind": "Leadership",
+      "title": "AWS Technical Lead",
+      "context": "Technical lead for the AWS club at college."
+    },
+    {
+      "id": "event-coordinator",
+      "icon": "events",
+      "kind": "Leadership",
+      "title": "Technical Event Coordinator & Participant",
+      "context": "Coordinating technical events, and taking part in them."
+    }
+  ]
+}
