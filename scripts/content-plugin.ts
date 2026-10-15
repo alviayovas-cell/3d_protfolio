@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Plugin } from "vite";
+import { buildCmsConfig } from "./cms-config.ts";
 import { z } from "zod";
 import {
   CONTENT_SCHEMAS,
@@ -24,6 +25,8 @@ import {
  *    summary inside #root are generated from the content, so what search engines read
  *    can't drift from what the page shows.
  * 3. sitemap.xml — emitted on build with today's date as `lastmod`.
+ * 4. admin/config.json — the /admin panel's config, generated from scripts/cms-config.ts
+ *    (served by the dev server, emitted on build).
  */
 
 export const SITE_URL = "https://www.alviayovas.in";
@@ -197,8 +200,16 @@ export function contentPlugin(): Plugin {
         .replace("<!-- content:summary -->", buildSummary(profile, about, projects, skills, experience, education, resume));
     },
 
+    configureServer(server) {
+      server.middlewares.use("/admin/config.json", (_req, res) => {
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        res.end(JSON.stringify(buildCmsConfig(), null, 2));
+      });
+    },
+
     generateBundle() {
       this.emitFile({ type: "asset", fileName: "sitemap.xml", source: buildSitemap() });
+      this.emitFile({ type: "asset", fileName: "admin/config.json", source: JSON.stringify(buildCmsConfig(), null, 2) });
     },
   };
 }

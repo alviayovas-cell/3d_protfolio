@@ -24,6 +24,23 @@ lookingFor, resume). Edit the JSON, not the components. Shapes are defined once 
 - **Generates** the page title, Person/WebSite JSON-LD and the static crawler summary
   inside `#root` (`index.html` is a template), plus `sitemap.xml` with today's date.
 
+### Admin panel (`/admin`)
+
+**https://www.alviayovas.in/admin/** — [Sveltia CMS](https://sveltiacms.app) editing the
+same JSON files. Sign in with GitHub; **Save** commits to `main` and Vercel redeploys in
+about a minute. Uploaded images are converted to WebP in the browser.
+
+- **Config** is generated from `scripts/cms-config.ts` (icon options come from the
+  schema) and served at `/admin/config.json`. Add a schema field → add it there too.
+- **Sign-in** runs through two Vercel functions, `api/auth.ts` and `api/callback.ts`
+  (logic in `api/_lib/oauth.ts`): CSRF-checked, `public_repo` scope only, tokens only
+  posted to this site's own hosts, and only GitHub accounts in `ALLOWED_GITHUB_USERS`
+  (default `alviayovas-cell`) may sign in.
+- **Vercel env vars:** `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET` from a
+  GitHub OAuth App whose callback URL is `https://www.alviayovas.in/api/callback`.
+- **Locally:** `npm run dev`, open `http://localhost:5173/admin/index.html` and choose
+  *Work with Local Repository* (Chrome/Edge) — edits go straight to your working copy.
+
 Images: screenshots are 1400px-wide WebP under `public/images/projects/`; the photo is
 `alvia-avatar.webp` (display) + `alvia-avatar.jpg` (structured data). Link previews use
 `public/og-image.jpg` (1200×630). `public/googlef0cdf51bb5082d80.html` keeps Google

@@ -182,7 +182,7 @@ export function Projects() {
                           ))}
                         </ul>
 
-                        {project.stack && (
+                        {!!project.stack?.length && (
                           <p className="mt-4 font-display text-[0.7rem] uppercase tracking-[0.18em] text-mist-600">
                             {project.stack.join(" · ")}
                           </p>

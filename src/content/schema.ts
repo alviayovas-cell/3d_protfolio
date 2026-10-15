@@ -19,7 +19,9 @@ const url = z.url({ protocol: /^https?$/ });
 const sitePath = z.string().regex(/^\/[^\s]*$/, "must start with / (a path on this site)");
 const id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "use lowercase-words-with-dashes");
 const text = z.string().trim().min(1);
-const note = z.string().optional();
+/** Optional field: an empty string (what a cleared form input saves) counts as absent. */
+const opt = <T extends z.ZodType>(schema: T) => z.preprocess((v) => (v === "" ? undefined : v), schema.optional());
+const note = opt(z.string());
 
 /** Makes `{ items: [...] }` — the list wrapper the admin panel edits — with unique ids. */
 const list = <T extends z.ZodObject<{ id: typeof id }>>(item: T) =>
@@ -50,7 +52,7 @@ export const profileSchema = z.object({
   tagline: text,
   email: z.email(),
   /** Optional: remove it and the phone row and WhatsApp button disappear. */
-  phone: z.string().regex(/^\+?[\d\s-]{7,}$/, "digits, spaces and an optional leading +").optional(),
+  phone: opt(z.string().regex(/^\+?[\d\s-]{7,}$/, "digits, spaces and an optional leading +")),
   location: text,
   /** Drives the "Available for work" badge on the photo. */
   availableForWork: z.boolean(),
@@ -75,14 +77,14 @@ export const projectSchema = z.object({
   /** One-line summary — what the project actually is, no invented metrics. */
   summary: text,
   highlights: z.array(text),
-  stack: z.array(text).optional(),
-  repoUrl: url.optional(),
-  liveUrl: url.optional(),
+  stack: opt(z.array(text)),
+  repoUrl: opt(url),
+  liveUrl: opt(url),
   /** Real screenshot of the running app, under `public/images/projects/`. */
-  screenshot: sitePath.optional(),
-  screenshotAlt: z.string().optional(),
+  screenshot: opt(sitePath),
+  screenshotAlt: opt(z.string()),
   /** Emblem shown when there's no screenshot; a generic folder icon if omitted. */
-  icon: z.enum(PROJECT_ICONS).optional(),
+  icon: opt(z.enum(PROJECT_ICONS)),
   note,
 }).refine((p) => !p.screenshot || !!p.screenshotAlt?.trim(), {
   message: "a screenshot needs alt text describing what it shows",
@@ -94,7 +96,7 @@ export const skillGroupSchema = z.object({
   icon: z.enum(SKILL_ICONS),
   title: text,
   /** Where these came from — a provenance note, not rendered. */
-  source: z.string().optional(),
+  source: opt(z.string()),
   skills: z.array(text).min(1),
 });
 
@@ -103,7 +105,7 @@ export const experienceSchema = z.object({
   role: text,
   organisation: text,
   /** Extra context shown next to the organisation, e.g. a sponsor or problem id. */
-  detail: z.string().optional(),
+  detail: opt(z.string()),
   /** Leave empty when no dates can be supported. */
   period: z.string(),
   current: z.boolean(),
@@ -128,7 +130,7 @@ export const certificationSchema = z.object({
   issuer: text,
   period: text,
   summary: text,
-  credentialUrl: url.optional(),
+  credentialUrl: opt(url),
 });
 
 export const achievementSchema = z.object({
