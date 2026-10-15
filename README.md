@@ -26,7 +26,7 @@ lookingFor, resume). Edit the JSON, not the components. Shapes are defined once 
 
 ### Admin panel (`/admin`)
 
-**https://www.alviayovas.in/admin/** — [Sveltia CMS](https://sveltiacms.app) editing the
+**https://www.alviayovas.in/admin** — [Sveltia CMS](https://sveltiacms.app) editing the
 same JSON files. Sign in with GitHub; **Save** commits to `main` and Vercel redeploys in
 about a minute. Uploaded images are converted to WebP in the browser.
 
