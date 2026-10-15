@@ -1,4 +1,5 @@
 {
+  "availableForWork": false,
   "firstName": "Alvia",
   "lastName": "Yovas",
   "fullName": "Alvia Yovas S",
@@ -22,6 +23,5 @@
     "instagram": "https://instagram.com/alvia_yovas"
   },
   "avatarSrc": "/images/alvia-avatar.webp",
-  "availableForWork": true,
   "avatarShareSrc": "/images/alvia-avatar.jpg"
 }
