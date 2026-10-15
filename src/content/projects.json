@@ -20,6 +20,9 @@
         "ESP32"
       ],
       "icon": "sentinel",
+      "role": "System Lead",
+      "period": "2026",
+      "team": "6-person team",
       "note": "From the résumé's Featured Project. No repo, live URL or screenshot: it's in-progress hardware work, so it shows the system diagram instead."
     },
     {

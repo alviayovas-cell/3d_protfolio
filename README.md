@@ -24,6 +24,14 @@ lookingFor, resume). Edit the JSON, not the components. Shapes are defined once 
 - **Generates** the page title, Person/WebSite JSON-LD and the static crawler summary
   inside `#root` (`index.html` is a template), plus `sitemap.xml` with today's date.
 
+### Project pages (`/projects/<id>`)
+
+Every entry in `projects.json` gets its own page, prerendered at build time from the same
+`index.html` template with its own title, description, canonical URL, `CreativeWork` +
+`BreadcrumbList` JSON-LD and crawler summary, and listed in `sitemap.xml`. The app picks
+the page from the URL (`src/lib/routes.ts`; no client-side router — links are full page
+loads). The optional `overview`, `role`, `period` and `team` fields only appear there.
+
 ### Admin panel (`/admin`)
 
 **https://www.alviayovas.in/admin** — [Sveltia CMS](https://sveltiacms.app) editing the

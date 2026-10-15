@@ -5,6 +5,7 @@ import { NAV_ITEMS, SECTION_IDS } from "../../data/navigation";
 import { useActiveSection } from "../../hooks/useActiveSection";
 import { useScrolled } from "../../hooks/useScrolled";
 import { cn } from "../../lib/cn";
+import { ROUTE, sectionHref } from "../../lib/routes";
 import { Container } from "../ui/Container";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,7 +13,9 @@ import { ThemeToggle } from "./ThemeToggle";
 /** Premium sticky nav: transparent over the hero, blurred glass once scrolled, with a live active-section indicator. */
 export function Navbar() {
   const scrolled = useScrolled();
-  const activeId = useActiveSection(SECTION_IDS);
+  const observedId = useActiveSection(SECTION_IDS);
+  // Off the home page there are no sections to observe; a project page sits under Projects.
+  const activeId = ROUTE.page === "home" ? observedId : ROUTE.page === "project" ? "projects" : "";
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -28,7 +31,7 @@ export function Navbar() {
         <Container>
           <div className={cn("flex items-center justify-between transition-all duration-500", scrolled ? "h-16" : "h-20")}>
             <a
-              href="#home"
+              href={ROUTE.page === "home" ? "#home" : "/"}
               className="font-display text-lg font-semibold tracking-tight text-mist-50"
             >
               ALVIA <span className="text-gradient">YOVAS</span>
@@ -38,7 +41,8 @@ export function Navbar() {
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.id}
-                  href={`#${item.id}`}
+                  href={sectionHref(item.id)}
+                  aria-current={activeId === item.id && ROUTE.page === "project" ? "page" : undefined}
                   className={cn(
                     // whitespace-nowrap: a two-word label ("Looking For") otherwise wraps
                     // inside its link, making it taller than its neighbours and throwing

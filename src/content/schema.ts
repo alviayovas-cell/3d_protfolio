@@ -50,6 +50,8 @@ export const profileSchema = z.object({
   roles: z.array(text).min(1),
   greeting: text,
   tagline: text,
+  /** The home page's description in Google results and link previews (~150 characters). */
+  seoDescription: z.string().trim().min(50).max(200),
   email: z.email(),
   /** Optional: remove it and the phone row and WhatsApp button disappear. */
   phone: opt(z.string().regex(/^\+?[\d\s-]{7,}$/, "digits, spaces and an optional leading +")),
@@ -85,6 +87,16 @@ export const projectSchema = z.object({
   screenshotAlt: opt(z.string()),
   /** Emblem shown when there's no screenshot; a generic folder icon if omitted. */
   icon: opt(z.enum(PROJECT_ICONS)),
+  // Long-form fields for the project's own page (/projects/<id>). All optional: the
+  // page shows whichever are filled in.
+  /** Paragraphs telling the project's story — problem, approach, outcome. */
+  overview: opt(z.array(text)),
+  /** Your role, e.g. "System Lead" or "Solo developer". */
+  role: opt(z.string()),
+  /** When, e.g. "2025" or "Jan – Mar 2026". */
+  period: opt(z.string()),
+  /** Team, e.g. "6-person team" or "Solo". */
+  team: opt(z.string()),
   note,
 }).refine((p) => !p.screenshot || !!p.screenshotAlt?.trim(), {
   message: "a screenshot needs alt text describing what it shows",

@@ -135,6 +135,9 @@ export function buildCmsConfig() {
               strings("roles", "Rotating roles", { hint: "The hero cycles through these. One per row.", min: 1 }),
               str("greeting", "Greeting", { hint: "Small text above your name, e.g. “Hello, I'm”." }),
               text("tagline", "Tagline", { hint: "One or two sentences under your role." }),
+              text("seoDescription", "Search description", {
+                hint: "How the home page is described in Google results and link previews. Aim for about 150 characters.",
+              }),
               str("email", "Email", { type: "email" }),
               optional(
                 str("phone", "Phone", {
@@ -201,6 +204,16 @@ export function buildCmsConfig() {
                   hint: "Leave empty for a generic folder icon.",
                 }),
               ),
+              optional({
+                name: "overview",
+                label: "Overview (project page)",
+                widget: "list",
+                field: text("paragraph", "Paragraph"),
+                hint: "The story on the project's own page — the problem, what you built, how, and what came of it. One paragraph per item. Shown only on /projects/…",
+              }),
+              optional(str("role", "My role (project page)", { hint: "e.g. System Lead, Solo developer, Frontend lead." })),
+              optional(str("period", "When (project page)", { hint: "e.g. 2025 or Jan – Mar 2026." })),
+              optional(str("team", "Team (project page)", { hint: "e.g. 6-person team, Solo." })),
               note,
             ],
           ),

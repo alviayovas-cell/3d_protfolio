@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NAV_ITEMS } from "../../data/navigation";
 import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 import { cn } from "../../lib/cn";
+import { sectionHref } from "../../lib/routes";
 
 interface MobileMenuProps {
   open: boolean;
@@ -67,7 +68,7 @@ export function MobileMenu({ open, activeId, onClose }: MobileMenuProps) {
             {NAV_ITEMS.map((item) => (
               <motion.a
                 key={item.id}
-                href={`#${item.id}`}
+                href={sectionHref(item.id)}
                 onClick={onClose}
                 variants={itemVariants}
                 className={cn(
